@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotation>
+	<folder>tabledetected</folder>
+	<filename>A-Series Product Guide_Page_30.png</filename>
+	<path>D:\whiteowlconsultinggroup\cust\sedw\maincode\preprocessing\tableprocessing\data\collectedimages\train\A-Series Product Guide_Page_30.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1700</width>
+		<height>2175</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>tabledetected</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>137</xmin>
+			<ymin>239</ymin>
+			<xmax>1067</xmax>
+			<ymax>661</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>tabledetected</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>139</xmin>
+			<ymin>838</ymin>
+			<xmax>1151</xmax>
+			<ymax>2017</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>tabledetected</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1186</xmin>
+			<ymin>869</ymin>
+			<xmax>1590</xmax>
+			<ymax>1991</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotation>
+	<folder>tabledetected</folder>
+	<filename>A-Series Product Guide_Page_32.png</filename>
+	<path>D:\whiteowlconsultinggroup\cust\sedw\maincode\preprocessing\tableprocessing\data\collectedimages\train\A-Series Product Guide_Page_32.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1700</width>
+		<height>2175</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>tabledetected</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>136</xmin>
+			<ymin>205</ymin>
+			<xmax>1153</xmax>
+			<ymax>2023</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>tabledetected</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1185</xmin>
+			<ymin>234</ymin>
+			<xmax>1588</xmax>
+			<ymax>1993</ymax>
+		</bndbox>
+	</object>
+</annotation>
