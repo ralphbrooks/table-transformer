@@ -15,9 +15,7 @@ def main():
 
     parser = argparse.ArgumentParser()
 
-    # TODO - the problem is that when I am first starting to train, I don't have a checkpoint
-    
-    # TODO - this needs to be an actual checkpoint that you provide
+
     parser.add_argument("--checkpoint_path", 
                         required=True)
     #required
@@ -49,7 +47,7 @@ def main():
     parser.add_argument("--batch_size", default=16)
     parser.add_argument("--num_workers", default=16)
     
-    # TODO - this is needed for table_line_item_detection. Not sure what to put there.
+    # TODO - Matěj - I could use an explanation here.
     parser.add_argument(
         "--table_detection_predictions_pickle",
         default=None,

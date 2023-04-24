@@ -60,8 +60,10 @@ def get_bbox_predictions(
         [labels["orig_size"].detach().unsqueeze(0) for labels in batch["labels"]]
     )
 
-    # This is post processing the output of the model. It rescales the bboxes to the original image size. 
-    # TODO - all of the tensors are coming up blank when they go through
+    # This is post processing the output of the model. It rescales the bboxes to the original image size.
+
+    # TODO - Matěj - all of the tensors are coming up blank when they go through
+    # Matěj - It would be helpful to talk through this part of the code and the rescaling part of your code.
     postprocessed_outputs = extractor.post_process_object_detection(
         out, threshold=threshold, target_sizes=orig_sizes
     )
@@ -187,26 +189,6 @@ class TableTransformerDataset(torch.utils.data.Dataset):
 
 
 
-    def _get_coco_annots_and_crop_boxes(self):
-        """
-        RAB - I already have my annotations in the COCO format
-        This function is only going to return annotation and crop bbox for the target task
-
-        Returns
-        -------
-        coco_annots: This is the category id
-
-        coco_annots, crop_bboxes
-            Both lists contain one element for each page in the dataset
-        """
-        
-        if self.filter_category_ids is not None:
-            pass
-        
-        pass 
-
-    def get_coco_annotations_and_crop_boxes(self):
-        pass
 
     def __len__(self) -> int:
         """Return number of examples in the dataset"""
@@ -289,7 +271,6 @@ class TableTransformerDataset(torch.utils.data.Dataset):
 
         # Given the target and given the image, extract the features
         # The extractor will do the conversion into a format that the model can understand
-        # TODO - this line ill confirm that I have my target formatted correctly 
 
         encoding = self.extractor(images=img, annotations=target, return_tensors="pt")
 
@@ -306,7 +287,7 @@ class TableTransformerDataset(torch.utils.data.Dataset):
         (and their bbox coordinates are changed to be relative to the crop top
         left corner)
 
-        RAB: There is a cropping that occurs and annotations rescaled. 
+
 
         Parameters
         ----------
@@ -317,10 +298,9 @@ class TableTransformerDataset(torch.utils.data.Dataset):
             (top, left, right, bottom) (as returned by TableDetr)
         """
 
-        # crop is going to give guidance as to what precisely I am doing with crop_bbox
-        new_img = img.crop(box=crop_bbox)
 
-        # TODO - err - there is a lot missing from this function
+
+        # TODO - Matěj - it would be helpful to talk through your crop_example code in the call.
 
 
 
@@ -406,7 +386,6 @@ class TableDetr(pl.LightningModule):
         # if cropped bboxes have been saved, store them in a variable
         self.crop_bboxes_filename = crop_bboxes_filename
 
-        # TODO ERR - add in table-line-item-detection
 
         if task == "table-detection":
             hf_id = "microsoft/table-transformer-detection"
@@ -437,16 +416,11 @@ class TableDetr(pl.LightningModule):
 
         if initial_checkpoint.endswith(".ckpt"):
 
-
-            # TODO - How is torch able to load from just the hf_id string?
-            # TODO - why is map_location="cpu" not included on the below line?
             ckpt = torch.load(initial_checkpoint)
 
             # The following is going to load the weights and biases of the model
             # This is helpful when you are resuming fine tuning
 
-            # TODO ERR- I have no idea what is going on that has checkpoint with extra stuff
-            # TODO ERR - It is unclear because I am not sure where the code is saving the checkpoint
             self.model.load_state_dict(
                 {
                     k.replace("model.model.", "model.")
@@ -465,7 +439,7 @@ class TableDetr(pl.LightningModule):
         self.model.config.label2id["table"] = 0
         self.model.config.id2label[0] = "table"
 
-        # TODO ERR - add the code for table row after you get table working
+
 
         # This is HF specific. The feature extractor essential for preparing input data. 
         self.extractor = AutoFeatureExtractor.from_pretrained(hf_id)
@@ -508,8 +482,7 @@ class TableDetr(pl.LightningModule):
         pixel_values = batch["pixel_values"]
         pixel_mask = batch["pixel_mask"]
 
-        # This is the label that just states table (or table row)?
-        # TODO - verify that you are seeing labels 
+
         labels = [{k: v.to(self.device) for k, v in t.items()} for t in batch["labels"]]
 
         # This is a forward pass with lablels 
@@ -569,7 +542,7 @@ class TableDetr(pl.LightningModule):
                 "lr": self.lr_backbone,
             },
         ]
-        # TODO - I thought there was a better loss function than this
+
         # Weight decay looks at the magnitude of parameter values and penalizes the large ones
         # I am keeping weight decay in for now because it is in the original code
         optimizer = torch.optim.AdamW(param_dicts, lr=self.lr, weight_decay=self.weight_decay)
